@@ -1,8 +1,6 @@
 function App() {
-  const [codeState, setCodeState] = React.useState(
-    "<div><p>Hello</p><p>World</p></div>"
-  );
-  const [selectorState, setSelectorState] = React.useState("p");
+  const [codeState, setCodeState] = React.useState("");
+  const [selectorState, setSelectorState] = React.useState("");
   const [queryResults, setQueryResults] = React.useState("");
 
   React.useEffect(() => {
