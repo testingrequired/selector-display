@@ -1,11 +1,15 @@
-function Code({ get, set }) {
+function Code({ get, set, maxRows = 15 }) {
+  const value = get;
+  const rows = value.split("\n").length;
+  const r = rows > maxRows ? maxRows : rows;
+
   return React.createElement("div", { className: "Code form-group" }, [
     React.createElement("label", {}, "HTML"),
     React.createElement("textarea", {
-      rows: get.length ? 15 : 5,
-      value: get,
+      className: "form-control",
       onChange: evt => set(evt.target.value),
-      className: "form-control"
+      value,
+      rows: r
     })
   ]);
 }
