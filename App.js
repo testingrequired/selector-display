@@ -7,9 +7,8 @@ function App() {
     const doc = new DOMParser().parseFromString(codeState, "text/html");
 
     if (selectorState) {
-      const body = doc.querySelector("body");
       try {
-        const elements = body.querySelectorAll(selectorState);
+        const elements = doc.querySelectorAll(selectorState);
         let results = [];
         elements.forEach(element => {
           results.push(element.outerHTML);
