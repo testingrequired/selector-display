@@ -1,7 +1,7 @@
 function App() {
   const [codeState, setCodeState] = React.useState("");
   const [selectorState, setSelectorState] = React.useState("");
-  const [queryResults, setQueryResults] = React.useState("");
+  const [queryResults, setQueryResults] = React.useState([]);
 
   React.useEffect(() => {
     const doc = new DOMParser().parseFromString(codeState, "text/html");
@@ -13,12 +13,12 @@ function App() {
         elements.forEach(element => {
           results.push(element.outerHTML);
         });
-        setQueryResults(results.join("\n"));
+        setQueryResults(results);
       } catch (e) {
-        setQueryResults("");
+        setQueryResults([]);
       }
     } else {
-      setQueryResults("");
+      setQueryResults([]);
     }
   }, [codeState, selectorState]);
 
