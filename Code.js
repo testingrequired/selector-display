@@ -1,23 +1,24 @@
 function Code({ get, set }) {
+  const $ = React.createElement;
   const [maxRows, setMaxRows] = React.useState(15);
   const value = get;
   const newlines = value.split("\n").length;
   const limitExpand = newlines > maxRows;
   const rows = limitExpand ? maxRows : newlines;
 
-  return React.createElement(
+  return $(
     "div",
     { className: "Code form-group" },
-    React.createElement("label", {}, "HTML"),
-    React.createElement("textarea", {
+    $("label", {}, "HTML"),
+    $("textarea", {
       className: "form-control",
       onChange: evt => set(evt.target.value),
       value,
       rows
     }),
-    limitExpand && React.createElement("label", {}, "Max Rows"),
+    limitExpand && $("label", {}, "Max Rows"),
     limitExpand &&
-      React.createElement("input", {
+      $("input", {
         type: "number",
         value: maxRows,
         className: "form-control",
