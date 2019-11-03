@@ -1,11 +1,11 @@
 function Code({ get, set }) {
-  return React.createElement(
-    "div",
-    { className: "Code" },
+  return React.createElement("div", { className: "Code form-group" }, [
+    React.createElement("label", {}, "HTML"),
     React.createElement("textarea", {
-      rows: 25,
+      rows: get.length ? 15 : 5,
       value: get,
-      onChange: evt => set(evt.target.value)
+      onChange: evt => set(evt.target.value),
+      className: "form-control"
     })
-  );
+  ]);
 }

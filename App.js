@@ -1,6 +1,8 @@
 function App() {
-  const [codeState, setCodeState] = React.useState("");
-  const [selectorState, setSelectorState] = React.useState("");
+  const [codeState, setCodeState] = React.useState(
+    "<div><p>Hello</p><p>World</p></div>"
+  );
+  const [selectorState, setSelectorState] = React.useState("p");
   const [queryResults, setQueryResults] = React.useState("");
 
   React.useEffect(() => {
@@ -22,24 +24,29 @@ function App() {
     }
   }, [codeState, selectorState]);
 
-  const resultsMessage = queryResults.length
-    ? `Results: ${queryResults.split("\n").length}`
-    : "Results: 0";
-
   return React.createElement("div", { className: "App" }, [
-    React.createElement("h2", {}, "HTML"),
     React.createElement(Code, { get: codeState, set: setCodeState }),
     ...(codeState
       ? [
-          React.createElement("h2", {}, "Selector"),
           React.createElement(Selector, {
             get: selectorState,
             set: setSelectorState
           }),
-          React.createElement("h2", {}, "Results"),
-          React.createElement("p", {}, resultsMessage),
-          React.createElement(Output, { results: queryResults })
+          ...(selectorState
+            ? [
+                React.createElement("hr"),
+                React.createElement("h5", {}, "Results"),
+                React.createElement("hr"),
+                React.createElement(Output, { results: queryResults })
+              ]
+            : [])
         ]
-      : [React.createElement("p", {}, "Please enter some HTML to begin.")])
+      : [
+          React.createElement(
+            "p",
+            { className: "alert alert-success" },
+            "Please enter some HTML to begin."
+          )
+        ])
   ]);
 }
