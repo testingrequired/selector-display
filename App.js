@@ -1,19 +1,19 @@
 function App() {
+  const parser = React.useRef(new DOMParser());
   const [codeState, setCodeState] = React.useState("");
   const [selectorState, setSelectorState] = React.useState("");
   const [queryResults, setQueryResults] = React.useState([]);
 
   React.useEffect(() => {
-    const doc = new DOMParser().parseFromString(codeState, "text/html");
+    const doc = parser.current.parseFromString(codeState, "text/html");
 
     if (selectorState) {
       try {
         const elements = doc.querySelectorAll(selectorState);
-        let results = [];
-        elements.forEach(element => {
-          results.push(element.outerHTML);
-        });
-        setQueryResults(results);
+
+        setQueryResults(
+          Array.prototype.slice.call(elements).map(element => element.outerHTML)
+        );
       } catch (e) {
         setQueryResults([]);
       }
