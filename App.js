@@ -17,7 +17,6 @@ function App() {
           Array.prototype.slice.call(elements).map(element => element.outerHTML)
         );
       } catch (e) {
-        debugger;
         if (e.message && e.message.includes("is not a valid selector")) {
           setSelectorError(true);
         }
