@@ -27,13 +27,19 @@ function App() {
     ? `Results: ${queryResults.split("\n").length}`
     : "Results: 0";
 
+  debugger;
+
   return React.createElement("div", { className: "App" }, [
     React.createElement("h2", {}, "HTML"),
     React.createElement(Code, { state: codeState }),
-    React.createElement("h2", {}, "Selector"),
-    React.createElement(Selector, { state: selectorState }),
-    React.createElement("h2", {}, "Results"),
-    React.createElement("p", {}, resultsMessage),
-    React.createElement(Output, { results: queryResults })
+    ...(codeState[0]
+      ? [
+          React.createElement("h2", {}, "Selector"),
+          React.createElement(Selector, { state: selectorState }),
+          React.createElement("h2", {}, "Results"),
+          React.createElement("p", {}, resultsMessage),
+          React.createElement(Output, { results: queryResults })
+        ]
+      : [React.createElement("p", {}, "Please enter some HTML to begin.")])
   ]);
 }
