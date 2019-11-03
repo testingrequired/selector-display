@@ -1,15 +1,17 @@
 function App() {
-  const codeState = React.useState("<div><p>Hello</p><p>World</p></div>");
-  const selectorState = React.useState("");
+  const [codeState, setCodeState] = React.useState(
+    "<div><p>Hello</p><p>World</p></div>"
+  );
+  const [selectorState, setSelectorState] = React.useState("");
   const [queryResults, setQueryResults] = React.useState("");
 
   React.useEffect(() => {
     const doc = new DOMParser().parseFromString(codeState, "text/html");
-    const [selector] = selectorState;
-    if (selector) {
+
+    if (selectorState) {
       const body = doc.querySelector("body");
       try {
-        const elements = body.querySelectorAll(selector);
+        const elements = body.querySelectorAll(selectorState);
         let results = [];
         elements.forEach(element => {
           results.push(element.outerHTML);
@@ -27,15 +29,16 @@ function App() {
     ? `Results: ${queryResults.split("\n").length}`
     : "Results: 0";
 
-  debugger;
-
   return React.createElement("div", { className: "App" }, [
     React.createElement("h2", {}, "HTML"),
-    React.createElement(Code, { state: codeState }),
-    ...(codeState[0]
+    React.createElement(Code, { get: codeState, set: setCodeState }),
+    ...(codeState
       ? [
           React.createElement("h2", {}, "Selector"),
-          React.createElement(Selector, { state: selectorState }),
+          React.createElement(Selector, {
+            get: selectorState,
+            set: setSelectorState
+          }),
           React.createElement("h2", {}, "Results"),
           React.createElement("p", {}, resultsMessage),
           React.createElement(Output, { results: queryResults })

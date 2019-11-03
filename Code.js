@@ -1,14 +1,11 @@
-function Code(props) {
-  const { state } = props;
-  const [code, setCode] = state;
-
+function Code({ get, set }) {
   return React.createElement(
     "div",
     { className: "Code" },
     React.createElement("textarea", {
       rows: 25,
-      value: code,
-      onChange: evt => setCode(evt.target.value)
+      value: get,
+      onChange: evt => set(evt.target.value)
     })
   );
 }
