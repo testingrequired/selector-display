@@ -10,9 +10,9 @@ function App() {
       try {
         setSelectorError(false);
 
-        const elements = parser.current
-          .parseFromString(html, "text/html")
-          .querySelectorAll(selector);
+        const doc = parser.current.parseFromString(html, "text/html");
+
+        const elements = doc.querySelectorAll(selector);
 
         setSelectorResults(
           Array.prototype.slice.call(elements).map(element => element.outerHTML)
