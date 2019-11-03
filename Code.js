@@ -20,6 +20,7 @@ function Code({ get, set }) {
         type: "number",
         value: maxRows,
         className: "form-control",
+        min: 1,
         onChange: e => setMaxRows(e.target.value)
       })
   ]);
