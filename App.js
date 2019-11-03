@@ -29,35 +29,41 @@ function App() {
     }
   }, [codeState, selectorState]);
 
-  return React.createElement("div", { className: "App" }, [
+  const selectorInput = React.createElement(Selector, {
+    get: selectorState,
+    set: setSelectorState
+  });
+
+  const selectorResults = React.createElement(
+    React.Fragment,
+    {},
+    selectorError &&
+      React.createElement(
+        "p",
+        { className: "alert alert-danger" },
+        "Invalid Selector"
+      ),
+    React.createElement("hr"),
+    React.createElement("h5", {}, "Results"),
+    React.createElement("hr"),
+    React.createElement(Output, { results: queryResults })
+  );
+
+  return React.createElement(
+    "div",
+    { className: "App" },
     React.createElement(Code, { get: codeState, set: setCodeState }),
-    ...(codeState
-      ? [
-          React.createElement(Selector, {
-            get: selectorState,
-            set: setSelectorState
-          }),
-          ...(selectorState
-            ? [
-                selectorError &&
-                  React.createElement(
-                    "p",
-                    { className: "alert alert-danger" },
-                    "Invalid Selector"
-                  ),
-                React.createElement("hr"),
-                React.createElement("h5", {}, "Results"),
-                React.createElement("hr"),
-                React.createElement(Output, { results: queryResults })
-              ]
-            : [])
-        ]
-      : [
-          React.createElement(
-            "p",
-            { className: "alert alert-success" },
-            "Please enter some HTML to begin."
-          )
-        ])
-  ]);
+    codeState
+      ? React.createElement(
+          React.Fragment,
+          {},
+          selectorInput,
+          selectorState && selectorResults
+        )
+      : React.createElement(
+          "p",
+          { className: "alert alert-success" },
+          "Please enter some HTML to begin."
+        )
+  );
 }

@@ -5,9 +5,10 @@ function Code({ get, set }) {
   const limitExpand = newlines > maxRows;
   const rows = limitExpand ? maxRows : newlines;
 
-  return React.createElement("div", { className: "Code form-group" }, [
+  return React.createElement(
+    "div",
+    { className: "Code form-group" },
     React.createElement("label", {}, "HTML"),
-
     React.createElement("textarea", {
       className: "form-control",
       onChange: evt => set(evt.target.value),
@@ -23,5 +24,5 @@ function Code({ get, set }) {
         min: 1,
         onChange: e => setMaxRows(e.target.value)
       })
-  ]);
+  );
 }
