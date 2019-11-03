@@ -1,0 +1,9 @@
+.App {
+}
+
+.Code textarea,
+.Selector input,
+.Output {
+  width: 100%;
+  font-family: monospace;
+}
