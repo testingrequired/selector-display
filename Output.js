@@ -1,30 +1,22 @@
 function Output({ results }) {
-  const $ = React.createElement;
+  return html`
+    <ul className="list-group">
+      ${results.map((result, key) => {
+        const formattedHtml = prettier.format(result, {
+          parser: "html",
+          plugins: prettierPlugins
+        });
 
-  return $(
-    "ul",
-    { className: "list-group" },
-    ...results.map((result, key) =>
-      $(
-        "li",
-        { className: "list-group-item", key },
-        $(
-          "pre",
-          {
-            style: {
-              marginBottom: 0
-            }
-          },
-          $(
-            "code",
-            {},
-            prettier.format(result, {
-              parser: "html",
-              plugins: prettierPlugins
-            })
-          )
-        )
-      )
-    )
-  );
+        return html`
+          <li className="list-group-item" key=${key}>
+            <pre>
+                <code>
+                  ${formattedHtml}
+                </code>
+              </pre>
+          </li>
+        `;
+      })}
+    </ul>
+  `;
 }

@@ -1,5 +1,4 @@
 function Code({ get, set }) {
-  const $ = React.createElement;
   const [maxRows, setMaxRows] = React.useState(15);
   const [invalidHtml, setInvalidHtml] = React.useState(false);
   const value = get;
@@ -7,53 +6,53 @@ function Code({ get, set }) {
   const limitExpand = newlines > maxRows;
   const rows = limitExpand ? maxRows : newlines;
 
-  return $(
-    React.Fragment,
-    {},
-    $(
-      "div",
-      { className: "Code form-group" },
-      $("label", {}, "HTML"),
-      $("textarea", {
-        className: "form-control",
-        onChange: evt => {
-          set(evt.target.value);
-          if (invalidHtml) setInvalidHtml(false);
-        },
-        onBlur: () => {
-          try {
-            const formatted = prettier.format(value, {
-              parser: "html",
-              plugins: prettierPlugins
-            });
+  return html`
+    <div>
+      <div className="Code form-group">
+        <label>HTML</label>
+        <textarea
+          className="form-control"
+          onChange=${e => {
+            set(e.target.value);
+            if (invalidHtml) setInvalidHtml(false);
+          }}
+          onBlur=${() => {
+            try {
+              const formatted = prettier.format(value, {
+                parser: "html",
+                plugins: prettierPlugins
+              });
 
-            set(formatted);
-          } catch (e) {
-            console.log(`Invalid HTML: ${e.message}`);
-            setInvalidHtml(true);
-          }
-        },
-        value,
-        rows,
-        style: {
-          resize: "none"
-        }
-      }),
-      limitExpand && $("label", {}, "Max Rows"),
-      limitExpand &&
-        $("input", {
-          type: "number",
-          value: maxRows,
-          className: "form-control",
-          min: 1,
-          onChange: e => setMaxRows(e.target.value)
-        })
-    ),
-    invalidHtml &&
-      $(
-        "p",
-        { className: "alert alert-warning" },
-        "Invalid HTML. Check console for error."
-      )
-  );
+              set(formatted);
+            } catch (e) {
+              console.log(`Invalid HTML: ${e.message}`);
+              setInvalidHtml(true);
+            }
+          }}
+          value=${value}
+          rows=${rows}
+          style=${{ resize: "none" }}
+        ></textarea>
+
+        ${limitExpand &&
+          html`
+            <label>Max Rows</label>
+            <input
+              type="number"
+              value=${maxRows}
+              className="form-control"
+              min="1"
+              onChange=${e => setMaxRows(e.target.value)}
+            />
+          `}
+      </div>
+
+      ${invalidHtml &&
+        html`
+          <p className="alert alert-warning">
+            Invalid HTML. Check console for error.
+          </p>
+        `}
+    </div>
+  `;
 }

@@ -1,15 +1,13 @@
 function Selector({ get, set }) {
-  const $ = React.createElement;
-
-  return $(
-    "div",
-    { className: "Selector form-group" },
-    $("label", {}, "Selector"),
-    $("input", {
-      type: "text",
-      value: get,
-      onChange: evt => set(evt.target.value),
-      className: "form-control"
-    })
-  );
+  return html`
+    <div className="Selector form-group">
+      <label>Selector</label>
+      <input
+        type="text"
+        value=${get}
+        onChange=${e => set(e.target.value)}
+        className="form-control"
+      />
+    </div>
+  `;
 }

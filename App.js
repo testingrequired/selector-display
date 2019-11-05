@@ -2,7 +2,7 @@ function App() {
   const $ = React.createElement;
 
   const parser = React.useRef(new DOMParser());
-  const [html, setHtml] = React.useState("");
+  const [htmlInput, setHtmlInput] = React.useState("");
   const [selector, setSelector] = React.useState("");
   const [selectorError, setSelectorError] = React.useState(false);
   const [selectorResults, setSelectorResults] = React.useState([]);
@@ -12,7 +12,7 @@ function App() {
       try {
         setSelectorError(false);
 
-        const doc = parser.current.parseFromString(html, "text/html");
+        const doc = parser.current.parseFromString(htmlInput, "text/html");
 
         const elements = doc.querySelectorAll(selector);
 
@@ -29,39 +29,33 @@ function App() {
     } else {
       setSelectorResults([]);
     }
-  }, [html, selector]);
+  }, [htmlInput, selector]);
 
-  const selectorInput = $(Selector, {
-    get: selector,
-    set: setSelector
-  });
-
-  const selectorErrorAndResults = $(
-    React.Fragment,
-    {},
-    selectorError &&
-      $("p", { className: "alert alert-danger" }, "Invalid Selector"),
-    $("hr"),
-    $("h5", {}, "Results"),
-    $("hr"),
-    $(Output, { results: selectorResults })
-  );
-
-  return $(
-    "div",
-    { className: "App" },
-    $(Code, { get: html, set: setHtml }),
-    html
-      ? $(
-          React.Fragment,
-          {},
-          selectorInput,
-          selector && selectorErrorAndResults
-        )
-      : $(
-          "p",
-          { className: "alert alert-success" },
-          "Please enter some HTML to begin."
-        )
-  );
+  return html`
+    <div className="App">
+      <${Code} get=${htmlInput} set=${setHtmlInput}><//>
+      ${htmlInput
+        ? html`
+            <div>
+              <${Selector} get=${selector} set=${setSelector}><//>
+              ${selector &&
+                html`
+                  ${selectorError &&
+                    html`
+                      <p className="alert alert-danger">Invalid Selector</p>
+                    `}
+                  <hr />
+                  <h5>Results</h5>
+                  <hr />
+                  <${Output} results=${selectorResults}><//>
+                `}
+            </div>
+          `
+        : html`
+            <p className="alert alert-success">
+              Please enter some HTML to begin.
+            </p>
+          `}
+    </div>
+  `;
 }
