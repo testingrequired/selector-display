@@ -10,7 +10,11 @@ function Output({ results }) {
         { className: "list-group-item", key },
         $(
           "pre",
-          {},
+          {
+            style: {
+              marginBottom: 0
+            }
+          },
           $(
             "code",
             {},
