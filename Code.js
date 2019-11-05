@@ -14,7 +14,10 @@ function Code({ get, set }) {
       className: "form-control",
       onChange: evt => set(evt.target.value),
       value,
-      rows
+      rows,
+      style: {
+        resize: "none"
+      }
     }),
     limitExpand && $("label", {}, "Max Rows"),
     limitExpand &&
