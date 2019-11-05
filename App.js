@@ -52,7 +52,7 @@ function App() {
             </div>
           `
         : html`
-            <p className="alert alert-success">
+            <p className="alert alert-primary">
               Please enter some HTML to begin.
             </p>
           `}
