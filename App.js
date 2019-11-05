@@ -6,7 +6,6 @@ function App() {
   const [selector, setSelector] = React.useState("");
   const [selectorError, setSelectorError] = React.useState(false);
   const [selectorResults, setSelectorResults] = React.useState([]);
-  const [enablePrettier, setEnablePrettier] = React.useState(false);
 
   React.useEffect(() => {
     if (selector) {
@@ -37,17 +36,6 @@ function App() {
     set: setSelector
   });
 
-  const enablePrettierCheckbox = $(
-    "div",
-    { className: "form-group form-check" },
-    $("input", {
-      type: "checkbox",
-      className: "form-check-input",
-      onChange: e => setEnablePrettier(e.target.checked)
-    }),
-    $("label", { className: "form-check-label" }, "Enable Prettier")
-  );
-
   const selectorErrorAndResults = $(
     React.Fragment,
     {},
@@ -56,8 +44,7 @@ function App() {
     $("hr"),
     $("h5", {}, "Results"),
     $("hr"),
-    enablePrettierCheckbox,
-    $(Output, { results: selectorResults, enablePrettier })
+    $(Output, { results: selectorResults })
   );
 
   return $(

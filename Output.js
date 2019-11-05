@@ -1,4 +1,4 @@
-function Output({ results, enablePrettier }) {
+function Output({ results }) {
   const $ = React.createElement;
 
   return $(
@@ -14,12 +14,10 @@ function Output({ results, enablePrettier }) {
           $(
             "code",
             {},
-            enablePrettier
-              ? prettier.format(result, {
-                  parser: "html",
-                  plugins: prettierPlugins
-                })
-              : result
+            prettier.format(result, {
+              parser: "html",
+              plugins: prettierPlugins
+            })
           )
         )
       )
