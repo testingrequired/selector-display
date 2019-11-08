@@ -1,1 +1,6 @@
-ReactDOM.render(React.createElement(App), document.getElementById("root"));
+ReactDOM.render(
+  html`
+    <${App}><//>
+  `,
+  document.getElementById("root")
+);
