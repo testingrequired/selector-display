@@ -1,11 +1,18 @@
 function App() {
-  const $ = React.createElement;
-
-  const parser = React.useRef(new DOMParser());
-  const [htmlInput, setHtmlInput] = React.useState("");
-  const [selector, setSelector] = React.useState("");
+  const queryParams = useQuery();
+  const [htmlInput, setHtmlInput] = React.useState(
+    queryParams.get("html") || ""
+  );
+  const [selector, setSelector] = React.useState(
+    queryParams.get("selector") || ""
+  );
   const [selectorError, setSelectorError] = React.useState(false);
   const [selectorResults, setSelectorResults] = React.useState([]);
+  const parser = React.useRef(new DOMParser());
+
+  function useQuery() {
+    return new URLSearchParams(ReactRouterDOM.useLocation().search);
+  }
 
   React.useEffect(() => {
     if (selector) {
@@ -38,6 +45,13 @@ function App() {
         ? html`
             <div>
               <${Selector} get=${selector} set=${setSelector}><//>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <a
+                  className="btn btn-secondary"
+                  href=${`?html=${htmlInput}&selector=${selector}`}
+                  >Share</a
+                >
+              </div>
               ${selector &&
                 html`
                   ${selectorError &&
