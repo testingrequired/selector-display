@@ -44,14 +44,16 @@ function Code({ get, set }) {
 
         ${limitExpand &&
           html`
-            <label>Max Rows</label>
-            <input
-              type="number"
-              value=${maxRows}
-              className="form-control"
-              min="1"
-              onChange=${e => setMaxRows(e.target.value)}
-            />
+            <${React.Fragment}>
+              <label>Max Rows</label>
+              <input
+                type="number"
+                value=${maxRows}
+                className="form-control"
+                min="1"
+                onChange=${e => setMaxRows(e.target.value)}
+              />
+            <//>
           `}
       </div>
 
