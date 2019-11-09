@@ -24,10 +24,12 @@ function Code({ get, set }) {
           }}
           onBlur=${() => {
             try {
-              const formatted = prettier.format(value, {
-                parser: "html",
-                plugins: prettierPlugins
-              });
+              const formatted = prettier
+                .format(value, {
+                  parser: "html",
+                  plugins: prettierPlugins
+                })
+                .slice(0, 1);
 
               set(formatted);
             } catch (e) {
