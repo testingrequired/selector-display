@@ -40,12 +40,13 @@ function App() {
 
   return html`
     <div className="App">
-      <${Code} get=${htmlInput} set=${setHtmlInput}><//>
+      <${Code} get=${htmlInput} set=${setHtmlInput} />
+
       ${htmlInput
         ? html`
             <div>
-              <${Selector} get=${selector} set=${setSelector}><//>
-              <div class="btn-group" role="group" aria-label="Basic example">
+              <${Selector} get=${selector} set=${setSelector} />
+              <div class="btn-group" role="group">
                 <a
                   className="btn btn-secondary"
                   href=${`?html=${htmlInput}&selector=${selector}`}
@@ -61,7 +62,7 @@ function App() {
                   <hr />
                   <h5>Results</h5>
                   <hr />
-                  <${Output} results=${selectorResults}><//>
+                  <${Output} results=${selectorResults} />
                 `}
             </div>
           `

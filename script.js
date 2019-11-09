@@ -1,6 +1,6 @@
 ReactDOM.render(
   html`
-    <${ReactRouterDOM.BrowserRouter}><${App}><//><//>
+    <${ReactRouterDOM.BrowserRouter}><${App} /><//>
   `,
   document.getElementById("root")
 );
