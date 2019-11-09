@@ -1,6 +1,6 @@
 function Output({ results }) {
   return html`
-    <ul className="list-group">
+    <ul className="Output list-group">
       ${results
         .map(result =>
           prettier
@@ -15,10 +15,10 @@ function Output({ results }) {
             html`
               <li className="list-group-item" key=${index}>
                 <pre>
-                <code>
-                  ${formattedResult}
-                </code>
-              </pre>
+                  <code>
+                    ${formattedResult}
+                  </code>
+                </pre>
               </li>
             `
         )}

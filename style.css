@@ -8,3 +8,7 @@
   width: 100%;
   font-family: monospace;
 }
+
+.Output pre {
+  margin-bottom: 0;
+}
