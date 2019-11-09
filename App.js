@@ -49,7 +49,9 @@ function App() {
               <div className="btn-group" role="group">
                 <a
                   className="btn btn-secondary"
-                  href=${`?html=${htmlInput}&selector=${selector}`}
+                  href=${`?html=${encodeURIComponent(
+                    htmlInput
+                  )}&selector=${encodeURIComponent(selector)}`}
                   >Share</a
                 >
               </div>
