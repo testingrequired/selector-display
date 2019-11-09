@@ -29,7 +29,7 @@ function Code({ get, set }) {
                   parser: "html",
                   plugins: prettierPlugins
                 })
-                .slice(0, 1);
+                .slice(0, -1);
 
               set(formatted);
             } catch (e) {
