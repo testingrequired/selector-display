@@ -1,22 +1,27 @@
 function Output({ results }) {
   return html`
     <ul className="list-group">
-      ${results.map((result, key) => {
-        const formattedHtml = prettier.format(result, {
-          parser: "html",
-          plugins: prettierPlugins
-        });
-
-        return html`
-          <li className="list-group-item" key=${key}>
-            <pre>
+      ${results
+        .map(result =>
+          prettier
+            .format(result, {
+              parser: "html",
+              plugins: prettierPlugins
+            })
+            .trim()
+        )
+        .map(
+          (formattedResult, index) =>
+            html`
+              <li className="list-group-item" key=${index}>
+                <pre>
                 <code>
-                  ${formattedHtml}
+                  ${formattedResult}
                 </code>
               </pre>
-          </li>
-        `;
-      })}
+              </li>
+            `
+        )}
     </ul>
   `;
 }
