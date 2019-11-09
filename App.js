@@ -46,7 +46,7 @@ function App() {
         ? html`
             <div>
               <${Selector} get=${selector} set=${setSelector} />
-              <div class="btn-group" role="group">
+              <div className="btn-group" role="group">
                 <a
                   className="btn btn-secondary"
                   href=${`?html=${htmlInput}&selector=${selector}`}
@@ -55,14 +55,16 @@ function App() {
               </div>
               ${selector &&
                 html`
-                  ${selectorError &&
-                    html`
-                      <p className="alert alert-danger">Invalid Selector</p>
-                    `}
-                  <hr />
-                  <h5>Results</h5>
-                  <hr />
-                  <${Output} results=${selectorResults} />
+                  <${React.Fragment}>
+                    ${selectorError &&
+                      html`
+                        <p className="alert alert-danger">Invalid Selector</p>
+                      `}
+                    <hr />
+                    <h5>Results</h5>
+                    <hr />
+                    <${Output} results=${selectorResults} />
+                  <//>
                 `}
             </div>
           `
