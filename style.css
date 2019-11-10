@@ -4,9 +4,14 @@
 
 .Code textarea,
 .Selector input,
-.Output {
+.Output code {
   width: 100%;
   font-family: monospace;
+  font-size: 1.1em;
+}
+
+.Output code {
+  font-size: 1.2em;
 }
 
 .Output pre {

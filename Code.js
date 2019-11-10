@@ -40,6 +40,7 @@ function Code({ get, set }) {
           value=${value}
           rows=${rows}
           style=${{ resize: "none" }}
+          spellcheck="false"
         ></textarea>
 
         ${limitExpand &&
