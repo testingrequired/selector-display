@@ -1,21 +1,13 @@
 function App() {
   const queryParams = useQuery();
 
-  const [htmlInput, setHtmlInput] = React.useState(
-    queryParams.get("html") || ""
-  );
-  const [selector, setSelector] = React.useState(
-    queryParams.get("selector") || ""
-  );
+  const [htmlInput, setHtmlInput] = React.useState("");
+  const [selector, setSelector] = React.useState("");
   const [selectorError, setSelectorError] = React.useState(false);
   const [selectorResults, setSelectorResults] = React.useState([]);
+
   const parser = React.useRef(new DOMParser());
-
   const db = React.useRef(firebase.firestore());
-
-  function useQuery() {
-    return new URLSearchParams(ReactRouterDOM.useLocation().search);
-  }
 
   React.useEffect(() => {
     if (selector) {
@@ -71,15 +63,7 @@ function App() {
         ? html`
             <div>
               <${Selector} get=${selector} set=${setSelector} />
-              <div className="btn-group" role="group">
-                <a
-                  className="btn btn-secondary"
-                  href=${`?html=${encodeURIComponent(
-                    htmlInput
-                  )}&selector=${encodeURIComponent(selector)}`}
-                  >Share</a
-                >
-              </div>
+
               ${selector &&
                 html`
                   <${React.Fragment}>
@@ -102,4 +86,8 @@ function App() {
           `}
     </div>
   `;
+
+  function useQuery() {
+    return new URLSearchParams(ReactRouterDOM.useLocation().search);
+  }
 }
