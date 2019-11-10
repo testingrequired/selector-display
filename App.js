@@ -44,7 +44,14 @@ function App() {
             const data = doc.data();
 
             if (data.html) {
-              setHtmlInput(data.html);
+              setHtmlInput(
+                prettier
+                  .format(data.html, {
+                    parser: "html",
+                    plugins: prettierPlugins
+                  })
+                  .slice(0, -1)
+              );
             }
 
             if (data.selector) {
