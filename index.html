@@ -10,6 +10,31 @@
     <script src="https://www.unpkg.com/prettier@1.18.2/parser-html.js"></script>
     <script src="https://unpkg.com/htm@2.2.1/dist/htm.js"></script>
     <script src="https://unpkg.com/react-router-dom@5.1.2/umd/react-router-dom.min.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyCdZbsn_zupCYBRd7VeMm8PojzKFq8GKiY",
+        authDomain: "selector-display.firebaseapp.com",
+        databaseURL: "https://selector-display.firebaseio.com",
+        projectId: "selector-display",
+        storageBucket: "selector-display.appspot.com",
+        messagingSenderId: "990637969492",
+        appId: "1:990637969492:web:d3527986f25cce34151dc1",
+        measurementId: "G-Y2NYP8JKJ3"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
